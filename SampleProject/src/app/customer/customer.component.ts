@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './customer.component.html',  
 })
 export class CustomerComponent {
-  constructor(public httpc: HttpClient) {
+  constructor(public httpc: HttpClient) {    
     this.GetFromServer();
   }
   title = 'SampleProject';
@@ -15,7 +15,7 @@ export class CustomerComponent {
 
   GetFromServer(){
     debugger;
-    this.httpc.get("https://localhost:58098/api/Customer").subscribe(res=>this.SuccessGet(res),res=>this.ErrorGet(res))
+    this.httpc.get("http://localhost:58098/api/Customer").subscribe(res=>this.SuccessGet(res),res=>this.ErrorGet(res))
   }
   SuccessGet(res:any){
     console.log(res);
@@ -27,7 +27,7 @@ export class CustomerComponent {
     console.log(res);
   }
   AddCustomer() {
-    this.httpc.post("https://localhost:58098/api/Customer", this.CustomerModel).subscribe(res=>this.Success,res=>this.Error);
+    this.httpc.post("http://localhost:58098/api/Customer", this.CustomerModel).subscribe(res=>this.Success,res=>this.Error);
     this.CustomerModel = new Customer();
     this.GetFromServer();
   }
