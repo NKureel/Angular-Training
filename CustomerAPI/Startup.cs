@@ -55,7 +55,7 @@ namespace CustomerAPI
           .AllowAnyMethod()
           .AllowAnyHeader());
             app.UseRouting();
-
+            app.UseHttpsRedirection();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
