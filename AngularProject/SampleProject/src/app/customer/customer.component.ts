@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Customer } from './customer.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   templateUrl: './customer.component.html'
@@ -16,10 +16,9 @@ export class CustomerComponent {
   CustomerModel: Customer = new Customer();
   CustomerModels: Array<Customer> = new Array<Customer>();
 
-  AddCustomer() {
-    debugger;
+  AddCustomer() {    
     //this.CustomerModels.push(this.CustomerModel);
-    this.httpc.post("https://localhost:44332/api/Customer", this.CustomerModel).subscribe(res=>this.Success);
+    this.httpc.post("https://localhost:44332/api/Customer", this.CustomerModel).subscribe((res: any)=>this.Success);
     this.CustomerModel = new Customer();
     this.GetFromServer();
     //console.log(this.CustomerModels);
@@ -34,7 +33,8 @@ export class CustomerComponent {
 
   GetFromServer(){
     debugger;
-    this.httpc.get("https://localhost:44332/api/Customer").subscribe(res=>this.SuccessGet(res));
+    this.httpc.get("https://localhost:44332/api/Customer").subscribe((res: any)=>this.SuccessGet(res));
+    //this.httpc.get("http://localhost:58098/api/Customer").subscribe((res: any)=>this.SuccessGet(res));
   }
   SuccessGet(res:any){
     console.log(res);
@@ -45,12 +45,27 @@ export class CustomerComponent {
   ErrorGet(res:any){
     console.log(res);
   }
-  EditCustomer(input: Customer) {
-
+  Edit()
+  {
+    this.httpc.put("https://localhost:44332/api/Customer",this.CustomerModel).subscribe((res: any)=>this.Success);
+    this.CustomerModel = new Customer();
+    this.GetFromServer();
+  }
+  SelectCustomer(input: Customer) {
+    debugger;
     this.CustomerModel = input;
-
+   
   }
   DeleteCustomer(input: Customer) {
-    console.log(input);
+    debugger;
+    const options = {      
+      body: {
+        input
+      }
+    };
+    
+    this.httpc.delete<Customer>("https://localhost:44332/api/Customer",options).subscribe((res: any)=>this.Success);
+    this.CustomerModel = new Customer();
+    this.GetFromServer();
   }
 }

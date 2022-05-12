@@ -2,7 +2,7 @@
 
 namespace CustomerAPIProject.Migrations
 {
-    public partial class InitialCreateDb : Migration
+    public partial class InitialCustomerDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

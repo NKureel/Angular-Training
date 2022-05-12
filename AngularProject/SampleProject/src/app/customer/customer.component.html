@@ -3,10 +3,12 @@
 {{title}}
 
 <br /><br />
+<input type="hidden" asp-for="CustomerModel.id"/>
 Customer Code <input [(ngModel)]="CustomerModel.customerCode" type="text" /><br /><br />
 Customer Name <input [(ngModel)]="CustomerModel.customerName" type="text" /><br /><br />
 Customer Amount <input [(ngModel)]="CustomerModel.customerAmount" type="text" /><br /><br />
-<input type="submit" Value="Add" (click)="AddCustomer()" />
+<input type="submit" Value="Add" (click)="AddCustomer()"  />&nbsp;&nbsp;
+<input type="submit" Value="Edit" (click)="Edit()" />
 
 
 <table border="1">
@@ -17,10 +19,11 @@ Customer Amount <input [(ngModel)]="CustomerModel.customerAmount" type="text" />
         <td>Actions</td>
     </tr>
     <tr *ngFor="let cust of CustomerModels">
+        <td>{{cust.id}}</td>
         <td>{{cust.customerCode}}</td>
         <td>{{cust.customerName}}</td>
         <td>{{cust.customerAmount}}</td>
-        <td><input type="button" value="Edit" (click)="EditCustomer(cust)" />
+        <td><input type="button" value="Select" (click)="SelectCustomer(cust)" />
             <input type="button" value="Delete"  (click)="DeleteCustomer(cust)"/>
         </td>
     </tr>

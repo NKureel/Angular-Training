@@ -37,6 +37,7 @@ namespace CustomerAPIProject
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CustomerApi", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

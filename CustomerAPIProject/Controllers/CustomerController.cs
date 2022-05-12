@@ -29,6 +29,22 @@ namespace CustomerAPIProject.Controllers
             _context.Customers.Add(customer);
             return await _context.SaveChangesAsync();
         }
+
+        [HttpDelete]
+        public async Task<int> DeleteCustomer(Customer customer)
+        {
+            _context.Customers.Remove(customer);
+            return await _context.SaveChangesAsync();
+        }
+
+        [HttpPut]
+        public async Task<int> UpdateCustomer(Customer customer)
+        {
+            _context.Entry(customer).State = EntityState.Modified;
+            return await _context.SaveChangesAsync();
+        }
+
+
         [HttpGet]
         [Route("GetCustomer")]
         public async Task<Customer> GetCustomer(int id)
