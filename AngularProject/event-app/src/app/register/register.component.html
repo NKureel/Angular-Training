@@ -1,0 +1,26 @@
+<div class="py-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0">Register</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">UserName</label>
+                            <input type="email" class="form-control" aria-describedby="emailHelp"
+                              [(ngModel)]="registerUserData.userName"  placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                            [(ngModel)]="registerUserData.password"  placeholder="Password" required> 
+                        </div>
+                        <button type="submit" (click)="registerUser()" class="btn btn-primary float-right">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Customer } from './customer.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
   templateUrl: './customer.component.html'
@@ -31,8 +31,7 @@ export class CustomerComponent {
     console.log(res);
   }
 
-  GetFromServer(){
-    debugger;
+  GetFromServer(){    
     this.httpc.get("https://localhost:44332/api/Customer").subscribe((res: any)=>this.SuccessGet(res));
     //this.httpc.get("http://localhost:58098/api/Customer").subscribe((res: any)=>this.SuccessGet(res));
   }
@@ -47,25 +46,27 @@ export class CustomerComponent {
   }
   Edit()
   {
-    this.httpc.put("https://localhost:44332/api/Customer",this.CustomerModel).subscribe((res: any)=>this.Success);
-    this.CustomerModel = new Customer();
-    this.GetFromServer();
+    this.httpc.put("https://localhost:44332/api/Customer",this.CustomerModel).subscribe((res: any)=>{     this.CustomerModel = new Customer(); this.GetFromServer();});    
   }
-  SelectCustomer(input: Customer) {
-    debugger;
+  SelectCustomer(input: Customer) {    
     this.CustomerModel = input;
    
   }
-  DeleteCustomer(input: Customer) {
-    debugger;
-    const options = {      
-      body: {
-        input
-      }
-    };
+  DeleteCustomer(input: Customer) {    
+  /*  var customer= {
+      customerCode: input.customerCode,
+      customerName: input.customerName,
+      customerAmount: input.customerAmount
+    }*/   
+    let httparms=new HttpParams().set("id",input.id)
+    let options={params:httparms};
     
-    this.httpc.delete<Customer>("https://localhost:44332/api/Customer",options).subscribe((res: any)=>this.Success);
-    this.CustomerModel = new Customer();
-    this.GetFromServer();
+    this.httpc.delete("https://localhost:44332/api/Customer",options).subscribe((res: any)=>
+    {this.CustomerModel = new Customer();this.GetFromServer();});
+    
   }
+  hasError(typeofvalidator:string,controlname:string):boolean{
+    return this.CustomerModel.formCustomerGroup.controls[controlname].hasError(typeofvalidator);
+  }
+
 }

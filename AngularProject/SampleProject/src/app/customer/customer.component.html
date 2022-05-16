@@ -1,16 +1,18 @@
-{{sample}}
-<br />
-{{title}}
-
-<br /><br />
+<form [formGroup]=" CustomerModel.formCustomerGroup">
 <input type="hidden" asp-for="CustomerModel.id"/>
-Customer Code <input [(ngModel)]="CustomerModel.customerCode" type="text" /><br /><br />
-Customer Name <input [(ngModel)]="CustomerModel.customerName" type="text" /><br /><br />
-Customer Amount <input [(ngModel)]="CustomerModel.customerAmount" type="text" /><br /><br />
-<input type="submit" Value="Add" (click)="AddCustomer()"  />&nbsp;&nbsp;
+Customer Code <input formControlName="CustomerCodeControl" [(ngModel)]="CustomerModel.customerCode" type="text" /><br /><br />
+Customer Name <input formControlName="CustomerNameControl"  [(ngModel)]="CustomerModel.customerName" type="text" /><br /><br />
+Customer Amount <input formControlName="CustomerAmountControl" [(ngModel)]="CustomerModel.customerAmount" type="text" /><br /><br />
+<input [disabled]="!(CustomerModel.formCustomerGroup.valid)" type="submit" Value="Add" (click)="AddCustomer()"  />&nbsp;&nbsp;
 <input type="submit" Value="Edit" (click)="Edit()" />
-
-
+</form>
+<div  style="color:red;" *ngIf="CustomerModel.formCustomerGroup.dirty" [hidden]="!(hasError('required','CustomerCodeControl'))">
+    Customer Code is required
+</div>
+<br />
+<div style="color:red;" *ngIf="CustomerModel.formCustomerGroup.dirty" [hidden]="!(hasError('required','CustomerNameControl'))">
+    Customer Name is required
+</div>
 <table border="1">
     <tr>
         <td>Customer Code</td>

@@ -1,0 +1,42 @@
+<!--ngIf-->
+<div *ngIf="Succes_Test;">Test Successfull</div>
+<!--ngIf else-->
+<div *ngIf="Succes_Test;  else Fail_test;">Test Successfull</div>
+<!--ngIf then else-->
+<div *ngIf="Succes_Test; then hello_world; else Fail_test;">Test Successfull</div>
+<ng-template #hello_world>
+I am successfull
+</ng-template>
+<ng-template #Fail_test>
+  I am Fail
+  </ng-template>
+
+  <!---NgFor-->
+<ul>
+  <li *ngFor="let ct of contact">
+    {{ct.Name}} {{ct.Age}}
+  </li>
+</ul>
+<!--Loop with index-->
+<ul>
+  <li *ngFor="let ct of contact;index as i">
+    {{i}} {{ct.Name}} {{ct.Age}}
+  </li>
+</ul>
+<br/>
+<!--Even selector-->
+<ul>
+  <li *ngFor="let ct of contact;even as i">
+    <div *ngIf="i">
+    {{ct.Name}} {{ct.Age}}
+  </div>
+  </li>
+</ul>
+<h4>Learning ngSwitch</h4>
+<div [ngSwitch]="input">
+<div *ngSwitchCase="'A'">Hello I am A</div>
+<div *ngSwitchCase="'B'">Hello I am B</div>
+<div *ngSwitchCase="'C'">Hello I am C</div>
+<div *ngSwitchDefault>I am Default</div>
+</div>
+<router-outlet></router-outlet>

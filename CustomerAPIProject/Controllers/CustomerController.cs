@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CustomerAPIProject.Controllers
@@ -31,8 +32,9 @@ namespace CustomerAPIProject.Controllers
         }
 
         [HttpDelete]
-        public async Task<int> DeleteCustomer(Customer customer)
+        public async Task<int> DeleteCustomer(int id)
         {
+            var customer = _context.Customers.Where(x => x.ID == id).FirstOrDefault();
             _context.Customers.Remove(customer);
             return await _context.SaveChangesAsync();
         }
